@@ -22,16 +22,22 @@ public abstract class Controller {
 	 * @return opretter og returnerer en PN ordination.
 	 */
 	public static PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
-			Patient patient, Laegemiddel laegemiddel, double antal) {
+									   Patient patient, Laegemiddel laegemiddel, double antal) {
 //	ulovligheder
-	if (startDen == null)
+		if (startDen == null || slutDen == null || patient == null || laegemiddel == null) {
+			throw new IllegalArgumentException("Stardato, slutdato, patient og lægemiddel må ikke være null");
+		}
+		if (startDen.isAfter(slutDen)) {
+			throw new IllegalArgumentException("Startdato kan ikke være efter slutdato");
+		}
+		if (antal < 1) {
+			throw new IllegalArgumentException("Antal enheder kan ikke være mindre end 1");
+		}
+
 //	Oprettelse af PN - Ordination
-	PN ordination = new PN(startDen, slutDen, laegemiddel, antal);
-	patient.addOrdination(ordination);
-	return ordination;
-
-
-		return null;
+		PN ordination = new PN(startDen, slutDen, laegemiddel, antal);
+		patient.addOrdination(ordination);
+		return ordination;
 	}
 
 	/**
