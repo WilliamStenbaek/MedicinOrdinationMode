@@ -1,32 +1,58 @@
 package ordination;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PN {
-
+public class PN extends Ordination {
     private double antalEnheder;
+    private List<LocalDate> givninger = new ArrayList<>();
+
+    public PN(LocalDate startDen, LocalDate slutDen, Laegemiddel laegemiddel, double antalEnheder) {
+        super(startDen, slutDen, laegemiddel);
+        if (antalEnheder <= 0) {
+            throw new IllegalArgumentException("Antal enheder skal være større end 0.");
+        }
+        this.antalEnheder = antalEnheder;
+        this.givninger = new ArrayList<>();
+    }
+
 
     /**
      * Registrerer at der er givet en dosis paa dagen givesDen
      * Returnerer true hvis givesDen er inden for ordinationens gyldighedsperiode og datoen huskes
      * Retrurner false ellers og datoen givesDen ignoreres
+     *
      * @param givesDen
      * @return
      */
     public boolean givDosis(LocalDate givesDen) {
-        // TODO
-        return false;   
+        if (givesDen.isBefore(getStartDen()) || givesDen.isAfter(getSlutDen())){
+            return false;
+        }
+        givninger.add(givesDen);
+        return true;
+
     }
 
     public double doegnDosis() {
-        // TODO
-        return 0.0;
+        if (givninger.isEmpty())
+            return 0.0;
+        LocalDate førsteGivning = givninger.get(0);
+        LocalDate sidsteGivning = givninger.get(givninger.size() - 1);
+        int antalDage = (int) ChronoUnit.DAYS.between(førsteGivning, sidsteGivning) + 1;
+        return samletDosis() / antalDage;
+    }
+
+    @Override
+    public String getType() {
+        return "PN";
     }
 
 
     public double samletDosis() {
-        // TODO
-        return 0.0;
+        return getAntalGangeGivet() * getAntalEnheder();
     }
 
     /**
@@ -34,8 +60,7 @@ public class PN {
      * @return
      */
     public int getAntalGangeGivet() {
-        // TODO
-        return-1;
+        return givninger.size();
     }
 
     public double getAntalEnheder() {
