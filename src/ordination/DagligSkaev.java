@@ -2,7 +2,7 @@ package ordination;
 
 import java.time.LocalTime;
 
-public class DagligSkaev {
+public class  DagligSkaev {
     // TODO
 
 
