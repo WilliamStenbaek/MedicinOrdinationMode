@@ -82,7 +82,11 @@ public abstract class Controller {
 	 * Pre: ordination og dato er ikke null
 	 */
 	public static void ordinationPNAnvendt(PN ordination, LocalDate dato) {
-		// TODO
+		if (dato.isBefore(ordination.getStartDen()) || dato.isAfter(ordination.getSlutDen())){
+			throw new IllegalArgumentException("du prøver at give en dosis udenfor rammerne");
+		}	else {
+			ordination.givDosis(dato);
+		}
 	}
 
 	/**
