@@ -95,7 +95,11 @@ public abstract class Controller {
 	 * Pre: ordination og dato er ikke null
 	 */
 	public static void ordinationPNAnvendt(PN ordination, LocalDate dato) {
-		// TODO
+		if (dato.isBefore(ordination.getStartDen()) || dato.isAfter(ordination.getSlutDen())){
+			throw new IllegalArgumentException("du prøver at give en dosis udenfor rammerne");
+		}	else {
+			ordination.givDosis(dato);
+		}
 	}
 
 	/**
@@ -105,8 +109,19 @@ public abstract class Controller {
 	 * Pre: patient og lægemiddel er ikke null
 	 */
 	public static double anbefaletDosisPrDoegn(Patient patient, Laegemiddel laegemiddel) {
-		//TODO
-		return 0;
+		double anbefaletdosis;
+
+		if (patient.getVaegt() < 25)	{
+			anbefaletdosis = laegemiddel.getEnhedPrKgPrDoegnLet();
+		}
+		else if (patient.getVaegt()  <= 120)	{
+			anbefaletdosis = laegemiddel.getEnhedPrKgPrDoegnNormal();
+		}
+		else {
+			anbefaletdosis = laegemiddel.getEnhedPrKgPrDoegnTung();
+		}
+
+		return anbefaletdosis;
 	}
 
 	/**
