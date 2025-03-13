@@ -37,8 +37,13 @@ public abstract class Controller {
 			LocalDate slutDen, Patient patient, Laegemiddel laegemiddel,
 			double morgenAntal, double middagAntal, double aftenAntal,
 			double natAntal) {
-		// TODO
-		return null;
+		if (slutDen.isBefore(startDen)){
+			throw new IllegalArgumentException("slut dato er efter startdato!!");
+		}	else {
+			DagligFast dagligFast = new DagligFast(startDen, slutDen, laegemiddel, morgenAntal, middagAntal, aftenAntal, natAntal);
+			patient.addOrdination(dagligFast);
+			return dagligFast;
+		}
 	}
 
 	/**
