@@ -23,7 +23,14 @@ public abstract class Controller {
 	 */
 	public static PN opretPNOrdination(LocalDate startDen, LocalDate slutDen,
 			Patient patient, Laegemiddel laegemiddel, double antal) {
-		// TODO
+//	ulovligheder
+	if (startDen == null)
+//	Oprettelse af PN - Ordination
+	PN ordination = new PN(startDen, slutDen, laegemiddel, antal);
+	patient.addOrdination(ordination);
+	return ordination;
+
+
 		return null;
 	}
 
