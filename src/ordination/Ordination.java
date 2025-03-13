@@ -7,8 +7,30 @@ public abstract class Ordination {
     private LocalDate startDen;
     private LocalDate slutDen;
 
-    // TODO Link til Laegemiddel
-    // TODO constructor (med specifikation)
+    private Laegemiddel laegemiddel;
+
+    public Ordination(LocalDate startDen, LocalDate slutDen) {
+        this.startDen = startDen;
+        this.slutDen = slutDen;
+
+        this.laegemiddel = null;
+    }
+    public Ordination(LocalDate startDen, LocalDate slutDen, Laegemiddel laegemiddel) {
+        this.startDen = startDen;
+        this.slutDen = slutDen;
+
+        this.laegemiddel = laegemiddel;
+    }
+
+    public void setLaegemiddel(Laegemiddel laegemiddel) {
+        if (this.laegemiddel != laegemiddel)    {
+            this.laegemiddel = laegemiddel;
+        }
+    }
+
+    public Laegemiddel getLaegemiddel() {
+        return laegemiddel;
+    }
 
     public LocalDate getStartDen() {
         return startDen;
@@ -25,6 +47,7 @@ public abstract class Ordination {
     public int antalDage() {
         return (int) ChronoUnit.DAYS.between(startDen, slutDen) + 1;
     }
+
 
     @Override
     public String toString() {
