@@ -131,8 +131,20 @@ public abstract class Controller {
 	 */
 	public static int antalOrdinationerPrVægtPrLægemiddel(double vægtStart,
 			double vægtSlut, Laegemiddel laegemiddel) {
-		// TODO
-		return 0;
+
+		int antalOrdinationer = 0;
+
+		for (var patient : storage.getAllPatienter())	{
+			if (patient.getVaegt() >= vægtStart && patient.getVaegt() <= vægtSlut)	{
+				for (var ordination : patient.getOrdinationer())	{
+					if (ordination.getLaegemiddel().equals(laegemiddel))	{
+						antalOrdinationer++;
+					}
+				}
+			}
+		}
+
+		return antalOrdinationer;
 	}
 
 	public static List<Patient> getAllPatienter() {
