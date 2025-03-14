@@ -38,4 +38,14 @@ public class DagligFast extends Ordination{
     public String getType() {
         return "Fast";
     }
+
+    public Dosis[] getDoser() {
+        Dosis[] copy = new Dosis[4];
+        int i = 0;
+        while (i < 4){
+            copy[i] = doser[i];
+            i++;
+        }
+        return copy;
+    }
 }
