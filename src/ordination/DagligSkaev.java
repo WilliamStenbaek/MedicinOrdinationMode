@@ -27,7 +27,7 @@ public class DagligSkaev extends Ordination{
         for (Dosis d : doser){
             result += d.getAntal();
         }
-        return result;
+        return result * antalDage();
     }
 
     @Override
@@ -41,7 +41,6 @@ public class DagligSkaev extends Ordination{
     }
 
     public ArrayList<Dosis> getDoser() {
-
-        return (ArrayList<Dosis>) doser.clone();
+        return new ArrayList<>(doser);
     }
 }
