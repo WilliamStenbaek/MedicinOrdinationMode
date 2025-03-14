@@ -39,4 +39,9 @@ public class DagligSkaev extends Ordination{
     public String getType() {
         return "Skæv";
     }
+
+    public ArrayList<Dosis> getDoser() {
+
+        return (ArrayList<Dosis>) doser.clone();
+    }
 }
