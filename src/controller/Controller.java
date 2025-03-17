@@ -35,6 +35,12 @@ public abstract class Controller {
 									   Patient patient, Laegemiddel laegemiddel, double antal) {
 
 //	Oprettelse af PN - Ordination
+		if (startDen == null || slutDen == null || patient == null || laegemiddel == null) {
+		throw new IllegalArgumentException("Stardato, slutdato, patient og lægemiddel må ikke være null");
+	}
+		if (startDen.isAfter(slutDen)) {
+		throw new IllegalArgumentException("Startdato kan ikke være efter slutdato");
+	}
 		PN ordination = new PN(startDen, slutDen, laegemiddel, antal);
 		patient.addOrdination(ordination);
 		return ordination;
