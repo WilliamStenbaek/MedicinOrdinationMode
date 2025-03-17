@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PNTest {
 
-    private Laegemiddel laegemiddel1 = new Laegemiddel("Paracetamol", 0.2, 0.4, 0.8, "2");
+    private Laegemiddel laegemiddel1 = new Laegemiddel("Paracetamol", 0.2, 0.4, 0.8, "styk");
     private PN pn1 = new PN(
             LocalDate.of(2025, 1, 1),
             LocalDate.of(2025, 1, 10),
