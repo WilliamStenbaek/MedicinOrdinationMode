@@ -235,4 +235,40 @@ class ControllerTest {
                 "Forventet IllegalArgumentException, men den blev ikke kastet");
     }
 
+    //Test af metode ordinationPNAnvendt
+    //Test af metode anbefaletDosisPrDoegn
+
+
+        @Test
+        void testAnbefaletDosis_LavVaegt() {
+            // TODO: Implement test
+        }
+
+
+        @Test
+        void testAnbefaletDosis_Graense25() {
+            // TODO: Implement test
+        }
+
+
+        @Test
+        void testAnbefaletDosis_Mellemvægt() {
+            // TODO: Implement test
+        }
+
+
+        @Test
+        void testAnbefaletDosis_Graense120() {
+            // TODO: Implement test
+        }
+
+
+        @Test
+        void testAnbefaletDosis_TungVaegt() {
+            // TODO: Implement test
+        }
+
+
+    //Test af metode antalOrdinationerPrVægtPrLægemiddel
+
 }
