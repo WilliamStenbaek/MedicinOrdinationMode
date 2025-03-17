@@ -248,25 +248,29 @@ class ControllerTest {
 
         @Test
         void testAnbefaletDosis_Graense25() {
-            // TODO: Implement test
+            Patient patient = Controller.opretPatient("1234567890", "Simon Baby", 25.0);
+            assertEquals(50, Controller.anbefaletDosisPrDoegn(patient, laegemiddel));
         }
 
 
         @Test
         void testAnbefaletDosis_Mellemvægt() {
-            // TODO: Implement test
+            Patient patient = Controller.opretPatient("1234567890", "Simon Baby", 80.0);
+            assertEquals(160, Controller.anbefaletDosisPrDoegn(patient, laegemiddel));
         }
 
 
         @Test
         void testAnbefaletDosis_Graense120() {
-            // TODO: Implement test
+            Patient patient = Controller.opretPatient("1234567890", "Simon Baby", 120.0);
+            assertEquals(240, Controller.anbefaletDosisPrDoegn(patient, laegemiddel));
         }
 
 
         @Test
         void testAnbefaletDosis_TungVaegt() {
-            // TODO: Implement test
+            Patient patient = Controller.opretPatient("1234567890", "Simon Baby", 140.0);
+            assertEquals(420, Controller.anbefaletDosisPrDoegn(patient, laegemiddel));
         }
 
 
