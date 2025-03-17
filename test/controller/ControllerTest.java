@@ -22,7 +22,7 @@ class ControllerTest {
         Controller.setStorage(storage);
 
         patient = new Patient("123456-7890", "Simon Kidde", 70.0);
-        laegemiddel = new Laegemiddel("Paracetamol", 0.1, 0.1, 0.1, "Styk");
+        laegemiddel = new Laegemiddel("Paracetamol", 1, 2, 3, "Styk");
 
         storage.addPatient(patient);
         storage.addLaegemiddel(laegemiddel);
@@ -241,7 +241,8 @@ class ControllerTest {
 
         @Test
         void testAnbefaletDosis_LavVaegt() {
-            // TODO: Implement test
+            Patient patient = Controller.opretPatient("1234567890", "Simon Baby", 20.0);
+            assertEquals(20, Controller.anbefaletDosisPrDoegn(patient, laegemiddel));
         }
 
 
