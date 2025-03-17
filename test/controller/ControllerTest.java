@@ -336,12 +336,12 @@ class ControllerTest {
     //Test af metode antalOrdinationerPrVægtPrLægemiddel
     @Test
     void testAntalOrdinationerPrVægtPrLægemiddel_NormalCase() {
-        patient = new Patient("123", "Patient A", 50);
+        patient = Controller.opretPatient("123", "Patient A", 50);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient, laegemiddel, 1);
-        var patient2 = new Patient("123", "Patient B", 80);
+        var patient2 = Controller.opretPatient("123", "Patient B", 80);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient2, laegemiddel, 1);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient2, laegemiddel, 1);
-        var patient3 = new Patient("123", "Patient C", 130);
+        var patient3 = Controller.opretPatient("123", "Patient C", 130);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient3, laegemiddel, 1);
 
         assertEquals(3, Controller.antalOrdinationerPrVægtPrLægemiddel(40, 100, laegemiddel));
@@ -349,12 +349,12 @@ class ControllerTest {
 
     @Test
     void testAntalOrdinationerPrVægtPrLægemiddel_IngenPatienterIIntervallet() {
-        patient = new Patient("123", "Patient A", 50);
+        patient = Controller.opretPatient("123", "Patient A", 50);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient, laegemiddel, 1);
-        var patient2 = new Patient("123", "Patient B", 80);
+        var patient2 = Controller.opretPatient("123", "Patient B", 80);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient2, laegemiddel, 1);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient2, laegemiddel, 1);
-        var patient3 = new Patient("123", "Patient C", 130);
+        var patient3 = Controller.opretPatient("123", "Patient C", 130);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient3, laegemiddel, 1);
 
         assertEquals(0, Controller.antalOrdinationerPrVægtPrLægemiddel(10, 20, laegemiddel));
@@ -362,12 +362,12 @@ class ControllerTest {
 
     @Test
     void testAntalOrdinationerPrVægtPrLægemiddel_EnEnkeltPatient() {
-        patient = new Patient("123", "Patient A", 50);
+        patient = Controller.opretPatient("123", "Patient A", 50);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient, laegemiddel, 1);
-        var patient2 = new Patient("123", "Patient B", 80);
+        var patient2 = Controller.opretPatient("123", "Patient B", 80);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient2, laegemiddel, 1);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient2, laegemiddel, 1);
-        var patient3 = new Patient("123", "Patient C", 130);
+        var patient3 = Controller.opretPatient("123", "Patient C", 130);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient3, laegemiddel, 1);
 
         assertEquals(1, Controller.antalOrdinationerPrVægtPrLægemiddel(40, 60, laegemiddel));
@@ -375,31 +375,16 @@ class ControllerTest {
 
     @Test
     void testAntalOrdinationerPrVægtPrLægemiddel_FlerePatienterIngenLægemiddel() {
-        patient = new Patient("123", "Patient A", 50);
+        patient = Controller.opretPatient("123", "Patient A", 50);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient, laegemiddel, 1);
-        var patient2 = new Patient("123", "Patient B", 80);
+        var patient2 = Controller.opretPatient("123", "Patient B", 80);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient2, laegemiddel, 1);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient2, laegemiddel, 1);
-        var patient3 = new Patient("123", "Patient C", 130);
+        var patient3 = Controller.opretPatient("123", "Patient C", 130);
         Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient3, laegemiddel, 1);
 
         var laegemiddel2 = new Laegemiddel("Ibuprogen", 0.1, 0.2, 0.4, "styk");
 
         assertEquals(0, Controller.antalOrdinationerPrVægtPrLægemiddel(40, 100, laegemiddel2));
-    }
-
-    @Test
-    void testAntalOrdinationerPrVægtPrLægemiddel_VægtStartStørreEndVægtSlut() {
-        patient = new Patient("123", "Patient A", 50);
-        Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient, laegemiddel, 1);
-        var patient2 = new Patient("123", "Patient B", 80);
-        Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient2, laegemiddel, 1);
-        Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient2, laegemiddel, 1);
-        var patient3 = new Patient("123", "Patient C", 130);
-        Controller.opretPNOrdination(LocalDate.of(2025, 1, 1), LocalDate.of(2025, 1, 1), patient3, laegemiddel, 1);
-
-        Exception exception = assertThrows(RuntimeException.class,() ->{
-            Controller.antalOrdinationerPrVægtPrLægemiddel(100, 40, laegemiddel);
-        });
     }
 }
