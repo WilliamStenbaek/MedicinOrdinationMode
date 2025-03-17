@@ -236,6 +236,8 @@ class ControllerTest {
     }
 
     //Test af metode ordinationPNAnvendt
+
+
     //Test af metode anbefaletDosisPrDoegn
 
 
