@@ -270,5 +270,28 @@ class ControllerTest {
 
 
     //Test af metode antalOrdinationerPrVægtPrLægemiddel
+        @Test
+        void testAntalOrdinationerPrVægtPrLægemiddel_NormalCase() {
+        // TODO: Implement test
+        }
 
+        @Test
+        void testAntalOrdinationerPrVægtPrLægemiddel_IngenPatienterIIntervallet() {
+        // TODO: Implement test
+        }
+
+        @Test
+        void testAntalOrdinationerPrVægtPrLægemiddel_EnEnkeltPatient() {
+        // TODO: Implement test
+        }
+
+        @Test
+        void testAntalOrdinationerPrVægtPrLægemiddel_FlerePatienterIngenLægemiddel() {
+        // TODO: Implement test
+        }
+
+        @Test
+        void testAntalOrdinationerPrVægtPrLægemiddel_VægtStartStørreEndVægtSlut() {
+        // TODO: Implement test
+        }
 }
