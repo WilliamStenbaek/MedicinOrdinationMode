@@ -15,6 +15,7 @@ class ControllerTest {
     private Storage storage;
     private Patient patient;
     private Laegemiddel laegemiddel;
+    private PN ordination;
 
     @BeforeEach
     void setUp() {
@@ -26,6 +27,14 @@ class ControllerTest {
 
         storage.addPatient(patient);
         storage.addLaegemiddel(laegemiddel);
+
+        ordination = Controller.opretPNOrdination(
+                LocalDate.of(2025, 3, 1),
+                LocalDate.of(2025, 3, 11),
+                patient,
+                laegemiddel,
+                2.0
+        );
     }
 
     //Test til metode OpretPNOrdination
@@ -236,6 +245,54 @@ class ControllerTest {
     }
 
     //Test af metode ordinationPNAnvendt
+        /*** ✅ TC1: Normal anvendelse af dosis ***/
+        @Test
+        void testOrdinationPNAnvendt_Normal() {
+            LocalDate dato = LocalDate.of(2025, 3, 5);
+
+            assertDoesNotThrow(() -> Controller.ordinationPNAnvendt(ordination, dato));
+        }
+
+        /*** ✅ TC2: Dosis gives på startdato ***/
+        @Test
+        void testOrdinationPNAnvendt_PaaStartDato() {
+            LocalDate dato = LocalDate.of(2025, 3, 1);
+
+            assertDoesNotThrow(() -> Controller.ordinationPNAnvendt(ordination, dato));
+            assertEquals(1, ordination.getAntalGangeGivet(), "Dosis blev ikke korrekt registreret");
+        }
+
+        /*** ✅ TC3: Dosis gives på slutdato ***/
+        @Test
+        void testOrdinationPNAnvendt_PaaSlutDato() {
+            LocalDate dato = LocalDate.of(2025, 3, 11);
+
+            assertDoesNotThrow(() -> Controller.ordinationPNAnvendt(ordination, dato));
+            assertEquals(1, ordination.getAntalGangeGivet(), "Dosis blev ikke korrekt registreret");
+        }
+
+        /*** ❌ TC4: Dato er før startdato ***/
+        @Test
+        void testOrdinationPNAnvendt_FoerStartDato() {
+            LocalDate dato = LocalDate.of(2025, 2, 1);
+
+            Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                    Controller.ordinationPNAnvendt(ordination, dato));
+
+            assertEquals("du prøver at give en dosis udenfor rammerne", exception.getMessage());
+        }
+
+        /*** ❌ TC5: Dato er efter slutdato ***/
+        @Test
+        void testOrdinationPNAnvendt_EfterSlutDato() {
+            LocalDate dato = LocalDate.of(2025, 3, 12);
+
+            Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                    Controller.ordinationPNAnvendt(ordination, dato));
+
+            assertEquals("du prøver at give en dosis udenfor rammerne", exception.getMessage());
+        }
+
 
 
     //Test af metode anbefaletDosisPrDoegn
